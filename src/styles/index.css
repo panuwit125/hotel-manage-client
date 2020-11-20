@@ -1,13 +1,97 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px !important;
+}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.ht-si-container {
+  width: 100vw;
+  height: 100vh;
+  background: cornflowerblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.ht-si-box {
+  background: white;
+  width: 100% !important;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  max-width: 300px !important;
+  min-width: 100px !important;
+}
+.ht-si-textfield {
+  margin-top: 10px;
+}
+.ht-si-btn {
+  margin-top: 15px !important;
+  width: 100% !important;
+}
+.ht-si-txt-cya {
+  text-align: center;
+  margin-top: 2px !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ht-si-ip {
+  width: 100% !important;
+}
+
+.ht-hp-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ht-if-container {
+  margin: 25px 100px;
+  display: flex;
+}
+.ht-if-ctn-1 {
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+}
+.ht-if-img{
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+.ht-if-ctn-detail {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ht-if-dt {
+  text-decoration: underline;
+}
+.ht-if-btn {
+  width: 100%;
+  margin-top: 10px !important;
+}
+.ht-if-ctn-detail-down-1 {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.ht-if-ip {
+  width: 100%;
+}
+.ht-if-ctn-detail-down-1-1{
+  width: 100%;
+  margin: 0px 10px
 }
