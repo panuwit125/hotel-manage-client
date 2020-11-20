@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import TextField from "@material-ui/core/TextField";
@@ -7,12 +7,21 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 function InfoHotel() {
   let { hotelId } = useParams();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('1198'));
+
+  useEffect(() => {
+    console.log(fullScreen)
+  }, [fullScreen])
+
   return (
     <div className="ht-if-container">
-      <div className="ht-if-ctn-1">
+      <div className="ht-if-ctn-1" style={fullScreen ? {maxWidth:"540px"}:null}>
         <div className="ht-if-ctn-img">
           <img
             src="https://img1.10bestmedia.com/Images/Photos/298458/HotIbis2_55_660x440.jpg"
@@ -23,8 +32,8 @@ function InfoHotel() {
           <div className="ht-if-ctn-detail-up">
             <h1>ibis Hotel</h1>
             <Rating name="read-only" value={3} readOnly />
-            <div>
-              <h3 className="ht-if-dt">Detail Hotel</h3>
+            <h3 className="ht-if-dt">Detail Hotel</h3>
+            <div className="ht-if-dt-1">
               <h3>
                 My nearest bts is Punnawithi station(E11) exit (URL HIDDEN)
                 close to Udomsuk station just 1 stop, they have free shuttle bus

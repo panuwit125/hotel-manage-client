@@ -55,8 +55,9 @@ h6 {
   flex-wrap: wrap;
 }
 .ht-if-container {
-  margin: 25px 100px;
+  margin: 25px 0;
   display: flex;
+  justify-content: center;
 }
 .ht-if-ctn-1 {
   width: 100%;
@@ -65,16 +66,25 @@ h6 {
   padding: 20px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
   display: flex;
+  flex-wrap: wrap;
+  max-width: 1174px;
+}
+.ht-if-ctn-img {
+  flex-grow: 1;
 }
 .ht-if-img{
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+
 }
 .ht-if-ctn-detail {
   margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-grow: 1;
 }
 .ht-if-dt {
   text-decoration: underline;
@@ -82,16 +92,28 @@ h6 {
 .ht-if-btn {
   width: 100%;
   margin-top: 10px !important;
+  max-width: 568px;
 }
 .ht-if-ctn-detail-down-1 {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  flex-wrap: wrap;
+  max-width: 568px;
 }
 .ht-if-ip {
   width: 100%;
 }
 .ht-if-ctn-detail-down-1-1{
-  width: 100%;
+  flex-grow: 1;
   margin: 0px 10px
 }
+.ht-if-ctn-detail-up {
+  width: 100%;
+}
+.ht-if-dt-1 {
+  max-width: 600px;
+  width: auto;
+  min-height: 100px;
+}
+
