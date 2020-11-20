@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import NavbarComponent from "./components/component.navbar";
+import Signin from "./screens/Signinpage";
+import Homepage from "./screens/Homepage";
+import Infopage from "./screens/InfoHotelpage";
+import ListHotelpage from "./screens/ListHotelpage";
+import Signinpage from "./screens/Paymentpage";
+import Bookingpage from "./screens/Bookingpage";
+import BookingListpage from "./screens/Bookinglistpage";
+
+const RouterAuth = () => {
+  useEffect(()=>{
+    // check Authetication
+  },[])
+  return (
+    <>
+      <Route path="/mybooking" exact component={BookingListpage} />
+      <Route path="/mybooking/:bookingId" exact component={Bookingpage} />
+    </>
+  );
+};
+
+const RouterList = () => {
+  return (
+    <NavbarComponent>
+      <Route path="/" exact component={Homepage} />
+      <Route path="/info" exact component={ListHotelpage} />
+      <Route path="/info/:hotelId" exact component={Infopage} />
+      <Route path="/info/:hotelId/payment" component={Signinpage} />
+      <RouterAuth />
+    </NavbarComponent>
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/signin" exact component={Signin} />
+        <RouterList />
+      </Switch>
+    </Router>
   );
 }
 
