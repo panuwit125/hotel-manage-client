@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import TextField from "@material-ui/core/TextField";
@@ -7,21 +7,26 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import MapTwoToneIcon from "@material-ui/icons/MapTwoTone";
+import DialogsComponent from "../components/component.dialogs";
 
 function InfoHotel() {
   let { hotelId } = useParams();
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('1198'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("1198"));
 
   useEffect(() => {
-    console.log(fullScreen)
-  }, [fullScreen])
+    console.log(fullScreen);
+  }, [fullScreen]);
 
   return (
     <div className="ht-if-container">
-      <div className="ht-if-ctn-1" style={fullScreen ? {maxWidth:"540px"}:null}>
+      <div
+        className="ht-if-ctn-1"
+        style={fullScreen ? { maxWidth: "540px" } : null}
+      >
         <div className="ht-if-ctn-img">
           <img
             src="https://img1.10bestmedia.com/Images/Photos/298458/HotIbis2_55_660x440.jpg"
@@ -40,6 +45,9 @@ function InfoHotel() {
                 to "Mega Bangna" , huge department store that have a lot of
                 shopping , dining restaurant, sporting etc.
               </h3>
+            </div>
+            <div style={{ display: "flex" }}>
+              <DialogsComponent />
             </div>
           </div>
           <div className="ht-if-ctn-detail-down">
