@@ -15,14 +15,15 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import HomeIcon from "@material-ui/icons/Home";
+import BookmarksIcon from "@material-ui/icons/Bookmarks";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -37,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
+  },
+  title:{
+    flexGrow: 1
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -109,9 +113,18 @@ export default function PersistentDrawerLeft({ children }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap className={classes.title}>
             Hotel management
           </Typography>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            //onClick={handleMenu}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -134,21 +147,10 @@ export default function PersistentDrawerLeft({ children }) {
         </div>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Home", "Mybooking"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ? <HomeIcon /> : <BookmarksIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>

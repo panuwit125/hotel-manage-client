@@ -116,4 +116,28 @@ h6 {
   width: auto;
   min-height: 100px;
 }
-
+.ht-cmbc-box{
+  background: white;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid rgb(207, 207, 207);
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+}
+.ht-cmbc-img-1{
+  width: 200px;
+}
+.ht-bk-box{
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  max-width: 1000px;
+  width: 100%;
+}
+.ht-bk-container {
+  display: flex;
+  justify-content: center;
+}
