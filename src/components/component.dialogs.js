@@ -50,7 +50,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs() {
+export default function CustomizedDialogs(point) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -60,6 +60,7 @@ export default function CustomizedDialogs() {
     setOpen(false);
   };
 
+  console.log(point)
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -70,7 +71,7 @@ export default function CustomizedDialogs() {
           Google Map
         </DialogTitle>
         <DialogContent dividers>
-          <GoogleMapComponent />
+          <GoogleMapComponent pointX={point.point.map_point1_hotel} pointY={point.point.map_point2_hotel} />
         </DialogContent>
       </Dialog>
     </div>

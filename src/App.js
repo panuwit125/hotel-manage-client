@@ -9,6 +9,7 @@ import Signinpage from "./screens/Paymentpage";
 import Bookingpage from "./screens/Bookingpage";
 import BookingListpage from "./screens/Bookinglistpage";
 import GooglemapComponent from "./components/component.googlemap"
+import ManageHotel from "./screens/ManageHotel"
 
 const RouterAuth = () => {
   useEffect(()=>{
@@ -30,6 +31,7 @@ const RouterList = () => {
       <Route path="/info/:hotelId" exact component={Infopage} />
       <Route path="/info/:hotelId/payment" component={Signinpage} />
       <Route path="/testmap" component={GooglemapComponent} />
+      <Route path="/manage/info" exact component={ManageHotel} />
       <RouterAuth />
     </NavbarComponent>
   );

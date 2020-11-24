@@ -7,37 +7,39 @@ import {
   InfoWindow,
 } from "react-google-maps";
 
-function Map() {
-  const [selectedPark, setSelectedPark] = useState(null);
-  return (
-    <GoogleMap
-      defaultZoom={10}
-      defaultCenter={{ lat: 45.421532, lng: -75.697189 }}
-    >
-      <Marker
-        position={{ lat: 45.421532, lng: -75.697189 }}
-        onClick={() => {
-          setSelectedPark(1);
-        }}
-      />
-      {selectedPark && (
-        <InfoWindow
-          position={{
-            lat: 45.421532,
-            lng: -75.697189,
+function GooglemapComponent({ pointX, pointY }) {
+  function Map() {
+    const [selectedPark, setSelectedPark] = useState(null);
+    console.log(parseFloat(pointX));
+    return (
+      <GoogleMap
+        defaultZoom={10}
+        defaultCenter={{ lat: parseFloat(pointX), lng: parseFloat(pointY) }}
+      >
+        <Marker
+          position={{ lat: parseFloat(pointX), lng: parseFloat(pointY) }}
+          onClick={() => {
+            //setSelectedPark(1);
           }}
-          onCloseClick={() => setSelectedPark(null)}
-        >
-          <div>park detail</div>
-        </InfoWindow>
-      )}
-    </GoogleMap>
-  );
-}
+        />
+        {selectedPark && (
+          <InfoWindow
+            position={{
+              lat: parseFloat(pointX),
+              lng: parseFloat(pointY),
+            }}
+            onCloseClick={() => setSelectedPark(null)}
+          >
+            <div>park detail</div>
+          </InfoWindow>
+        )}
+      </GoogleMap>
+    );
+  }
 
-const WrappedMap = withScriptjs(withGoogleMap(Map));
+  const WrappedMap = withScriptjs(withGoogleMap(Map));
 
-function GooglemapComponent() {
+  console.log(pointX, pointY);
   return (
     <div style={{ width: "500px", height: "500px" }}>
       <WrappedMap

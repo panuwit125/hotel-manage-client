@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -18,12 +18,16 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import BookmarksIcon from "@material-ui/icons/Bookmarks";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { Link, useHistory } from "react-router-dom";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import { message } from "antd";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -39,8 +43,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  title:{
-    flexGrow: 1
+  title: {
+    flexGrow: 1,
+    color: "white"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -84,7 +89,10 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawerLeft({ children }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  let history = useHistory();
+  const openmenu = Boolean(anchorEl);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -92,6 +100,24 @@ export default function PersistentDrawerLeft({ children }) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload(false);
+    success("Logout success");
+  };
+
+  const success = (text) => {
+    message.success(text);
   };
 
   return (
@@ -113,18 +139,47 @@ export default function PersistentDrawerLeft({ children }) {
           >
             <MenuIcon />
           </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={openmenu}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>
+              ID: {localStorage.getItem("user")}
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
           <Typography variant="h6" noWrap className={classes.title}>
             Hotel management
           </Typography>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            //onClick={handleMenu}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
+          {localStorage.getItem("jwt") ? (
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          ) : (
+            <div
+              className="ht-hp-txtlg"
+              onClick={() => history.push("/signin")}
+            >
+              LOGIN
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -147,14 +202,20 @@ export default function PersistentDrawerLeft({ children }) {
         </div>
         <Divider />
         <List>
-          {["Home", "Mybooking"].map((text, index) => (
-            <ListItem button key={text}>
+          <ListItem button>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          {localStorage.getItem("jwt") ? (
+            <ListItem button>
               <ListItemIcon>
-                {index % 2 === 0 ? <HomeIcon /> : <BookmarksIcon />}
+                <BookmarksIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary="Mybooking" />
             </ListItem>
-          ))}
+          ) : null}
         </List>
       </Drawer>
       <main
