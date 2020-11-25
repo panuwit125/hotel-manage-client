@@ -6,7 +6,7 @@ import Homepage from "./screens/Homepage";
 import Infopage from "./screens/InfoHotelpage";
 import ListHotelpage from "./screens/ListHotelpage";
 import Signinpage from "./screens/Paymentpage";
-import Bookingpage from "./screens/Bookingpage";
+import SearchPage from "./screens/Searchpage";
 import BookingListpage from "./screens/Bookinglistpage";
 import GooglemapComponent from "./components/component.googlemap"
 import ManageHotel from "./screens/ManageHotel"
@@ -18,7 +18,6 @@ const RouterAuth = () => {
   return (
     <>
       <Route path="/mybooking" exact component={BookingListpage} />
-      <Route path="/mybooking/:bookingId" exact component={Bookingpage} />
     </>
   );
 };
@@ -32,6 +31,7 @@ const RouterList = () => {
       <Route path="/info/:hotelId/payment" component={Signinpage} />
       <Route path="/testmap" component={GooglemapComponent} />
       <Route path="/manage/info" exact component={ManageHotel} />
+      <Route path="/search/:searchid" exact component={SearchPage} />
       <RouterAuth />
     </NavbarComponent>
   );

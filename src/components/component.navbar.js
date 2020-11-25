@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -18,10 +17,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import BookmarksIcon from "@material-ui/icons/Bookmarks";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { message } from "antd";
+import SearchComponent from "../components/component.search";
+
+import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
 
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: "white"
+    color: "white",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -84,6 +86,46 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  search: {
+    //position: "relative",
+    display: "flex",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    //height: "100%",
+    //position: "absolute",
+    //pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
 }));
 
 export default function PersistentDrawerLeft({ children }) {
@@ -119,6 +161,13 @@ export default function PersistentDrawerLeft({ children }) {
   const success = (text) => {
     message.success(text);
   };
+
+  const top100Films = [
+    { title: "The Shawshank Redemption", year: 1994 },
+    { title: "The Godfather", year: 1972 },
+    { title: "The Godfather: Part II", year: 1974 },
+    { title: "The Dark Knight", year: 2008 },
+  ];
 
   return (
     <div className={classes.root}>
@@ -162,6 +211,7 @@ export default function PersistentDrawerLeft({ children }) {
           <Typography variant="h6" noWrap className={classes.title}>
             Hotel management
           </Typography>
+          <SearchComponent />
           {localStorage.getItem("jwt") ? (
             <IconButton
               aria-label="account of current user"
@@ -202,14 +252,14 @@ export default function PersistentDrawerLeft({ children }) {
         </div>
         <Divider />
         <List>
-          <ListItem button onClick={()=>history.push("/")}>
+          <ListItem button onClick={() => history.push("/")}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
           {localStorage.getItem("jwt") ? (
-            <ListItem button onClick={()=>history.push("/mybooking")}>
+            <ListItem button onClick={() => history.push("/mybooking")}>
               <ListItemIcon>
                 <BookmarksIcon />
               </ListItemIcon>
