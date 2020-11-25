@@ -19,11 +19,14 @@ const RouterAuth = () => {
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       setisAuth(true);
+    } else {
+      history.push("/");
+      setisAuth(false)
     }
   }, []);
 
   if (!isAuth) {
-    history.push("/");
+    //history.push("/");
     return null;
   } else {
     return (
