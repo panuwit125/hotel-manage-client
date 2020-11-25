@@ -35,7 +35,7 @@ function CardMybookingComponent({ booking }) {
         </div>
         <div className="ht-cmbc-img">
           <img
-            src="https://img1.10bestmedia.com/Images/Photos/298458/HotIbis2_55_660x440.jpg"
+            src={data.image1_hotel}
             className="ht-cmbc-img-1"
           />
         </div>
