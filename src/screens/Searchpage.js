@@ -8,16 +8,15 @@ function SearchPage() {
   const [data, setData] = useState();
   let { searchid } = useParams();
 
-  const loadingdata = async () => {
-    const result = await searchFunc(searchid);
-    if (result.status === 200) {
-      console.log(result.data.result);
-      await setData(result.data.result);
-      await setisLoading(true);
-    }
-  };
-
   useEffect(() => {
+    const loadingdata = async () => {
+      const result = await searchFunc(searchid);
+      if (result.status === 200) {
+        console.log(result.data.result);
+        await setData(result.data.result);
+        await setisLoading(true);
+      }
+    };
     setisLoading(false);
     loadingdata();
   }, [searchid]);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,9 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import moment from "moment";
-import Numberformat from "react-number-format";
-import { comfirmbookingHotel } from "../functions/bookingFunc";
-import { message } from "antd";
 
 const styles = (theme) => ({
   root: {
@@ -61,25 +58,7 @@ export default function CustomizedDialogs({ open, setOpen, date }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const success = (text) => {
-    message.success({
-      content: text,
-      className: "custom-class",
-      style: {
-        marginTop: "10vh",
-      },
-    });
-  };
 
-  const error = (text) => {
-    message.error({
-      content: text,
-      className: "custom-class",
-      style: {
-        marginTop: "10vh",
-      },
-    });
-  };
   console.log(date);
   if (open) {
     console.log(date);

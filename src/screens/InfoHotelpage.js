@@ -35,20 +35,19 @@ function InfoHotel() {
   const fullScreen = useMediaQuery(theme.breakpoints.down("1198"));
   let history = useHistory();
 
-  const loadData = async () => {
-    const result = await getDataFunc(hotelId);
-    if (result.status === 200) {
-      console.log(moment().format("YYYY-MM-DD"));
-      await setDateBefore(moment().format("YYYY-MM-DD"));
-      await setDateAfter(moment().add(1, "days").format("YYYY-MM-DD"));
-      await console.log(result);
-      await setData(result.data);
-      await setisLoading(true);
-    }
-  };
-
   useEffect(() => {
-    loadData();
+    const loadData = async (hotelId) => {
+      const result = await getDataFunc(hotelId);
+      if (result.status === 200) {
+        console.log(moment().format("YYYY-MM-DD"));
+        await setDateBefore(moment().format("YYYY-MM-DD"));
+        await setDateAfter(moment().add(1, "days").format("YYYY-MM-DD"));
+        await console.log(result);
+        await setData(result.data);
+        await setisLoading(true);
+      }
+    };
+    loadData(hotelId);
   }, []);
 
   const ChangeBefore = (time) => {
