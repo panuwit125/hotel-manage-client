@@ -209,7 +209,7 @@ export default function PersistentDrawerLeft({ children }) {
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
           <Typography variant="h6" noWrap className={classes.title}>
-            Hotel management
+            HOTEL BOOKING
           </Typography>
           <SearchComponent />
           {localStorage.getItem("jwt") ? (

@@ -25,10 +25,10 @@ function Signin() {
     if (result.status === 200) {
       await console.log("200", result);
       await success(result.data.message);
-      await localStorage.setItem("jwt",result.data.AccessToken)
-      await localStorage.setItem("jwt-refresh",result.data.RefreshToken)
-      await localStorage.setItem("user",result.data.user_name)
-      await history.push("/")
+      await localStorage.setItem("jwt", result.data.AccessToken);
+      await localStorage.setItem("jwt-refresh", result.data.RefreshToken);
+      await localStorage.setItem("user", result.data.user_name);
+      await history.push("/");
     } else {
       await console.log("Error", result);
       await error(result.data.error);
@@ -64,120 +64,122 @@ function Signin() {
 
   return (
     <div className="ht-si-container">
-      <h4>
-        <ArrowBackIosIcon fontSize="small" />
-        Back
-      </h4>
-      <div className="ht-si-box">
-        <h2>Hotel Manage</h2>
-        {status ? (
-          <>
-            <div className="ht-si-textfield">
-              <TextField
-                id="standard-basic"
-                className="ht-si-ip"
-                label="Username"
-                value={userlogin}
-                onChange={(e) => setUserlogin(e.target.value)}
-              />
-            </div>
-            <div className="ht-si-textfield">
-              <TextField
-                id="standard-basic"
-                className="ht-si-ip"
-                label="Password"
-                type="password"
-                value={passlogin}
-                onChange={(e) => setPasslogin(e.target.value)}
-              />
-            </div>
-            <Button
-              variant="contained"
-              color="primary"
-              className="ht-si-btn"
-              onClick={ClickLogin}
-            >
-              Signin
-            </Button>
-            <h6 className="ht-si-txt-cya" onClick={() => setStatus(false)}>
-              Create your Account
-            </h6>
-          </>
-        ) : (
-          <>
-            <div className="ht-si-textfield">
-              <TextField
-                id="standard-basic"
-                className="ht-si-ip"
-                label="Username"
-                value={userregis}
-                onChange={(e) => setUserregis(e.target.value)}
-              />
-            </div>
-            <div className="ht-si-textfield">
-              <TextField
-                id="standard-basic"
-                className="ht-si-ip"
-                label="Password"
-                type="password"
-                value={passregis}
-                onChange={(e) => setPassregis(e.target.value)}
-              />
-            </div>
-            <div className="ht-si-textfield">
-              <TextField
-                id="standard-basic"
-                className="ht-si-ip"
-                label="Firstname"
-                value={firstregis}
-                onChange={(e) => setFirstregis(e.target.value)}
-              />
-            </div>
-            <div className="ht-si-textfield">
-              <TextField
-                id="standard-basic"
-                className="ht-si-ip"
-                label="Lastname"
-                value={lastregis}
-                onChange={(e) => setLastregis(e.target.value)}
-              />
-            </div>
-            <div className="ht-si-textfield">
-              <TextField
-                id="standard-basic"
-                className="ht-si-ip"
-                label="Email"
-                value={emailregis}
-                onChange={(e) => setEmailregis(e.target.value)}
-              />
-            </div>
-            <div className="ht-si-textfield">
-              <TextField
-                id="date"
-                label="Birthday"
-                type="date"
-                defaultValue="2017-05-24"
-                className="ht-si-ip"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={birdregis}
-                onChange={(e) => setBirdregis(e.target.value)}
-              />
-            </div>
-            <Button
-              variant="contained"
-              color="primary"
-              className="ht-si-btn"
-              onClick={ClickRegis}
-            >
-              Signup
-            </Button>
-            <h6 className="ht-si-txt-cya" onClick={() => setStatus(true)}>
-              Back to Signin
-            </h6>
-          </>
-        )}
+      <div className="ht-si-box-back">
+        <div className="ht-si-box-back-1">
+          <ArrowBackIosIcon fontSize="small" />
+          <h4>BACK</h4>
+        </div>
+        <div className="ht-si-box">
+          <h1 style={{textAlign:"center"}}>Hotel Booking</h1>
+          {status ? (
+            <>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Username"
+                  value={userlogin}
+                  onChange={(e) => setUserlogin(e.target.value)}
+                />
+              </div>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Password"
+                  type="password"
+                  value={passlogin}
+                  onChange={(e) => setPasslogin(e.target.value)}
+                />
+              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                className="ht-si-btn"
+                onClick={ClickLogin}
+              >
+                Signin
+              </Button>
+              <h6 className="ht-si-txt-cya" onClick={() => setStatus(false)}>
+                Create your Account
+              </h6>
+            </>
+          ) : (
+            <>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Username"
+                  value={userregis}
+                  onChange={(e) => setUserregis(e.target.value)}
+                />
+              </div>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Password"
+                  type="password"
+                  value={passregis}
+                  onChange={(e) => setPassregis(e.target.value)}
+                />
+              </div>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Firstname"
+                  value={firstregis}
+                  onChange={(e) => setFirstregis(e.target.value)}
+                />
+              </div>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Lastname"
+                  value={lastregis}
+                  onChange={(e) => setLastregis(e.target.value)}
+                />
+              </div>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Email"
+                  value={emailregis}
+                  onChange={(e) => setEmailregis(e.target.value)}
+                />
+              </div>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="date"
+                  label="Birthday"
+                  type="date"
+                  defaultValue="2017-05-24"
+                  className="ht-si-ip"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={birdregis}
+                  onChange={(e) => setBirdregis(e.target.value)}
+                />
+              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                className="ht-si-btn"
+                onClick={ClickRegis}
+              >
+                Signup
+              </Button>
+              <h6 className="ht-si-txt-cya" onClick={() => setStatus(true)}>
+                Back to Signin
+              </h6>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

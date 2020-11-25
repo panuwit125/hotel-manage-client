@@ -92,8 +92,12 @@ function InfoHotel() {
               <h1>{data.name_hotel}</h1>
               <Rating name="read-only" value={3} readOnly />
               <h3 className="ht-if-dt">Detail Hotel</h3>
-              <div className="ht-if-dt-1">
+              <div className="ht-if-dt-1" style={{marginBottom:10}}>
                 <h3>{data.detail_hotel}</h3>
+              </div>
+              <h3 className="ht-if-dt">Price per night</h3>
+              <div className="ht-if-dt-1" >
+                <h3>{data.price_hotel}</h3>
               </div>
               <div style={{ display: "flex" }}>
                 <DialogsComponent point={data} />
