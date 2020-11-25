@@ -66,7 +66,7 @@ function Signin() {
   return (
     <div className="ht-si-container">
       <div className="ht-si-box-back">
-        <div className="ht-si-box-back-1">
+        <div className="ht-si-box-back-1" onClick={()=>history.push("/")}>
           <ArrowBackIosIcon fontSize="small" />
           <h4>BACK</h4>
         </div>

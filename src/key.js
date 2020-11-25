@@ -1,3 +1,3 @@
 module.exports = {
-  url: "http://localhost:5000/api",
+  url: "https://hoteltestinternpanuwitapi.herokuapp.com/api",
 };
