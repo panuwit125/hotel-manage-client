@@ -202,14 +202,14 @@ export default function PersistentDrawerLeft({ children }) {
         </div>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={()=>history.push("/")}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
           {localStorage.getItem("jwt") ? (
-            <ListItem button>
+            <ListItem button onClick={()=>history.push("/mybooking")}>
               <ListItemIcon>
                 <BookmarksIcon />
               </ListItemIcon>
