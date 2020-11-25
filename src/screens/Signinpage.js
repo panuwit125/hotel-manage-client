@@ -13,6 +13,7 @@ function Signin() {
 
   const [userregis, setUserregis] = useState("");
   const [passregis, setPassregis] = useState("");
+  const [passcomfirmregis, setPasscomfirmregis] = useState("");
   const [firstregis, setFirstregis] = useState("");
   const [lastregis, setLastregis] = useState("");
   const [emailregis, setEmailregis] = useState("");
@@ -23,34 +24,34 @@ function Signin() {
   const ClickLogin = async () => {
     const result = await loginFunc(userlogin, passlogin);
     if (result.status === 200) {
-      await console.log("200", result);
       await success(result.data.message);
       await localStorage.setItem("jwt", result.data.AccessToken);
       await localStorage.setItem("jwt-refresh", result.data.RefreshToken);
       await localStorage.setItem("user", result.data.user_name);
       await history.push("/");
     } else {
-      await console.log("Error", result);
       await error(result.data.error);
     }
   };
 
   const ClickRegis = async () => {
-    const result = await regisFunc(
-      userregis,
-      passregis,
-      firstregis,
-      lastregis,
-      emailregis,
-      birdregis
-    );
-    if (result.status === 200) {
-      await console.log("200", result);
-      await success(result.data.message);
-      await window.location.reload(false);
+    if (passcomfirmregis === passregis) {
+      const result = await regisFunc(
+        userregis,
+        passregis,
+        firstregis,
+        lastregis,
+        emailregis,
+        birdregis
+      );
+      if (result.status === 200) {
+        await success(result.data.message);
+        await window.location.reload(false);
+      } else {
+        await error(result.data.error);
+      }
     } else {
-      await console.log("Error", result);
-      await error(result.data.error);
+      error("รหัสผ่านไม่ตรงกัน")
     }
   };
 
@@ -70,7 +71,7 @@ function Signin() {
           <h4>BACK</h4>
         </div>
         <div className="ht-si-box">
-          <h1 style={{textAlign:"center"}}>Hotel Booking</h1>
+          <h1 style={{ textAlign: "center" }}>Hotel Booking</h1>
           {status ? (
             <>
               <div className="ht-si-textfield">
@@ -123,6 +124,16 @@ function Signin() {
                   type="password"
                   value={passregis}
                   onChange={(e) => setPassregis(e.target.value)}
+                />
+              </div>
+              <div className="ht-si-textfield">
+                <TextField
+                  id="standard-basic"
+                  className="ht-si-ip"
+                  label="Comfirm Password"
+                  type="password"
+                  value={passcomfirmregis}
+                  onChange={(e) => setPasscomfirmregis(e.target.value)}
                 />
               </div>
               <div className="ht-si-textfield">

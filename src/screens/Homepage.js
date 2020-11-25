@@ -9,7 +9,6 @@ function Homepage() {
   const loadingdata = async () => {
     const result = await getAllDataFunc();
     if (result.status === 200) {
-      //console.log(result);
       await setData(result.data);
       await setisLoading(true);
     }
@@ -26,7 +25,6 @@ function Homepage() {
     return (
       <div className="ht-hp-container">
         {data.map((hotel, index) => {
-          //console.log(hotel)
           return <CardComponent hotel={hotel} key={index} />;
         })}
       </div>

@@ -142,24 +142,6 @@ function ManageHotel() {
           onChange={(e) => setImage3(e.target.value)}
           variant="outlined"
         />
-        {/*<input
-          className={classes.inp}
-          type="file"
-          id="myFile"
-          name="filename"
-        />
-        <input
-          className={classes.inp}
-          type="file"
-          id="myFile"
-          name="filename"
-        />
-        <input
-          className={classes.inp}
-          type="file"
-          id="myFile"
-          name="filename"
-        />*/}
         <TextField
           id="outlined-multiline-flexible"
           label="ราคาต่อคืน"

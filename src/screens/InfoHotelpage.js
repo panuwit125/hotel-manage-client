@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Rating from "@material-ui/lab/Rating";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {
+  useMediaQuery,
+  Button,
+  Select,
+  FormControl,
+  MenuItem,
+  InputLabel,
+  TextField,
+} from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import MapTwoToneIcon from "@material-ui/icons/MapTwoTone";
 import DialogsComponent from "../components/component.dialogs";
 import { getDataFunc } from "../functions/getdatahotelFunc";
 import moment from "moment";
+import Numberformat from "react-number-format";
+import { useHistory } from "react-router-dom";
+import { message } from "antd";
+import { validateAvailableHotel } from "../functions/bookingFunc";
+import DialogPaymentComponent from "../components/component.dialogspayment";
+import DialogAlertComponent from "../components/component.dialogsaleart";
 
 function InfoHotel() {
   let { hotelId } = useParams();
@@ -21,13 +27,17 @@ function InfoHotel() {
   const [dateAfter, setDateAfter] = useState();
   const [adult, setAdult] = useState(1);
   const [data, setData] = useState();
+  const [open, setOpen] = useState(false);
+  const [priceAll, setPriceAll] = useState(0);
   const theme = useTheme();
+  const [openAlert, setOpenAlert] = useState(false);
+  const [dateUnavailable, setDateUnavailable] = useState([]);
   const fullScreen = useMediaQuery(theme.breakpoints.down("1198"));
+  let history = useHistory();
 
   const loadData = async () => {
     const result = await getDataFunc(hotelId);
     if (result.status === 200) {
-      let newDate = new Date();
       console.log(moment().format("YYYY-MM-DD"));
       await setDateBefore(moment().format("YYYY-MM-DD"));
       await setDateAfter(moment().add(1, "days").format("YYYY-MM-DD"));
@@ -51,9 +61,8 @@ function InfoHotel() {
       moment().format("DD") <= arr[2]
     ) {
       setDateBefore(time);
-      console.log("YES");
     } else {
-      console.log("NO");
+      error("กรุณาเลือกวันในปัจจุบันหรืออนาคต");
     }
   };
 
@@ -69,10 +78,42 @@ function InfoHotel() {
       arrbefore[2] < arr[2]
     ) {
       setDateAfter(time);
-      console.log("YES");
     } else {
-      console.log("NO");
+      error("กรุณาเลือกวันที่อยู่หลังวันเข้าพัก");
     }
+  };
+
+  const ClickBooking = async () => {
+    console.log("Check-in", dateBefore);
+    console.log("Check-out", dateAfter);
+    console.log("Adult", adult);
+    const result = await validateAvailableHotel(
+      dateBefore,
+      dateAfter,
+      data._id,
+      data.numberofroom_hotel
+    );
+    await console.log(result);
+    if (result.status === 200 && result.data.avalible) {
+      setPriceAll(result.data.day_number * data.price_hotel);
+      console.log(result.data.day_number * data.price_hotel);
+      setOpen(true);
+    } else {
+      setDateUnavailable(result.data.hotel_unavalible);
+      console.log(result.data.hotel_unavalible);
+      error("โรงแรมเต็ม");
+      setOpenAlert(true);
+    }
+  };
+
+  const error = (text) => {
+    message.error({
+      content: text,
+      className: "custom-class",
+      style: {
+        marginTop: "10vh",
+      },
+    });
   };
 
   if (!isLoading) {
@@ -90,14 +131,28 @@ function InfoHotel() {
           <div className="ht-if-ctn-detail">
             <div className="ht-if-ctn-detail-up">
               <h1>{data.name_hotel}</h1>
-              <Rating name="read-only" value={3} readOnly />
               <h3 className="ht-if-dt">Detail Hotel</h3>
-              <div className="ht-if-dt-1" style={{marginBottom:10}}>
+              <div className="ht-if-dt-1" style={{ marginBottom: 10 }}>
                 <h3>{data.detail_hotel}</h3>
               </div>
-              <h3 className="ht-if-dt">Price per night</h3>
-              <div className="ht-if-dt-1" >
-                <h3>{data.price_hotel}</h3>
+
+              <div
+                className="ht-if-dt-1"
+                style={{ display: "flex", minHeight: 30 }}
+              >
+                <h3 className="ht-if-dt" style={{ marginRight: 5 }}>
+                  Price per night
+                </h3>{" "}
+                {"  : "}
+                <h3>
+                  <Numberformat
+                    value={data.price_hotel}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    style={{ marginLeft: 5, color: "red" }}
+                  />{" "}
+                  BATH
+                </h3>
               </div>
               <div style={{ display: "flex" }}>
                 <DialogsComponent point={data} />
@@ -145,7 +200,7 @@ function InfoHotel() {
                       labelId="demo-simple-select-placeholder-label-label"
                       id="demo-simple-select-placeholder-label"
                       value={adult}
-                      onChange={(e)=>setAdult(e.target.value)}
+                      onChange={(e) => setAdult(e.target.value)}
                       displayEmpty
                     >
                       <MenuItem value={1}>1</MenuItem>
@@ -160,6 +215,7 @@ function InfoHotel() {
                     variant="contained"
                     color="primary"
                     className="ht-if-btn"
+                    onClick={ClickBooking}
                   >
                     Booking
                   </Button>
@@ -168,11 +224,27 @@ function InfoHotel() {
                     variant="contained"
                     color="primary"
                     className="ht-if-btn"
+                    onClick={() => history.push("/signin")}
                   >
                     Login Please
                   </Button>
                 )}
               </div>
+              <DialogPaymentComponent
+                open={open}
+                setOpen={setOpen}
+                dateBefore={dateBefore}
+                dateAfter={dateAfter}
+                adult={adult}
+                price={priceAll}
+                hotel_id={data._id}
+                numberroom={data.numberofroom_hotel}
+              />
+              <DialogAlertComponent
+                open={openAlert}
+                setOpen={setOpenAlert}
+                date={dateUnavailable}
+              />
             </div>
           </div>
         </div>

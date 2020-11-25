@@ -1,13 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import Rating from "@material-ui/lab/Rating";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import Numberformat from "react-number-format";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@material-ui/core";
+import { LocationOn } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
@@ -22,9 +24,14 @@ const useStyles = makeStyles({
 export default function MediaCard(hotel) {
   const classes = useStyles();
   let history = useHistory();
-  console.log(hotel.hotel)
+  console.log(hotel.hotel);
   return (
-    <Card className={classes.root} onClick={()=>{history.push(`/info/${hotel.hotel.name_hotel}`)}}>
+    <Card
+      className={classes.root}
+      onClick={() => {
+        history.push(`/info/${hotel.hotel.name_hotel}`);
+      }}
+    >
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -35,15 +42,31 @@ export default function MediaCard(hotel) {
           <Typography gutterBottom variant="h5" component="h2">
             {hotel.hotel.name_hotel}
           </Typography>
-          <Rating name="read-only" value={4} readOnly />
           <Typography variant="body2" color="textSecondary" component="p">
-            <LocationOnIcon color="primary" fontSize="small" /> {hotel.hotel.province_hotel}, {hotel.hotel.country_hotel}
+            <LocationOn color="primary" fontSize="small" />{" "}
+            {hotel.hotel.province_hotel}, {hotel.hotel.country_hotel}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" style={{marginTop:10}}>
-            Price per night as low as
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            style={{ marginTop: 10 }}
+          >
+            Price per night
           </Typography>
-          <Typography gutterBottom variant="h6" component="h3" style={{color:"rgb(225, 45, 45)"}}>
-            THB {hotel.hotel.price_hotel} BATH
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="h3"
+            style={{ color: "rgb(225, 45, 45)" }}
+          >
+            THB{" "}
+            <Numberformat
+              value={hotel.hotel.price_hotel}
+              displayType={"text"}
+              thousandSeparator={true}
+            />{" "}
+            BATH
           </Typography>
         </CardContent>
       </CardActionArea>
