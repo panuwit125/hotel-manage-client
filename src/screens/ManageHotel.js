@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import TableComponent from "../components/component.tableshowhotel";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
@@ -7,6 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import TextField from "@material-ui/core/TextField";
 import { insertHotel } from "../functions/insertHotel";
 import { message } from "antd";
+import { getAllDataFunc } from "../functions/getalldatahotelFunc";
 
 const useStyles = makeStyles({
   fullList: {
@@ -38,6 +39,21 @@ function ManageHotel() {
   const [province, setProvince] = useState("");
   const [country, setCountry] = useState("");
   const [numberroom, setNumberroom] = useState("");
+
+  const [isLoading, setisLoading] = useState(false);
+  const [data, setData] = useState();
+
+  const loadingdata = async () => {
+    const result = await getAllDataFunc();
+    if (result.status === 200) {
+      await setData(result.data);
+      await setisLoading(true);
+    }
+  };
+
+  useEffect(() => {
+    loadingdata();
+  }, []);
 
   const ClickSave = async () => {
     const result = await insertHotel(
@@ -221,7 +237,7 @@ function ManageHotel() {
           เพิ่มข้อมูล
         </Button>
       </div>
-      <TableComponent />
+      <TableComponent data={data} />
     </div>
   );
 }
